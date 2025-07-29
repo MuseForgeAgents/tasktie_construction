@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskTie.ai - Turn Ideas Into Money-Making Content</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.svg" alt="TaskTie.ai" class="logo-image">
+                <span class="logo-text">TaskTie.ai</span>
+            </div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#examples">Examples</a>
+                <a href="#pricing">Pricing</a>
+                <button class="cta-button">Try Free</button>
+            </div>
+        </div>
+    </nav>
+
+```
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-background">
+        <div class="floating-elements"></div>
+    </div>
+    <div class="hero-content">
+        <h1 class="hero-title">Turn Any Idea Into<br><span class="gradient-text">Money-Making Content</span></h1>
+        <p class="hero-subtitle">From "what if" to "wow" in minutes. No tech skills needed.</p>
+        <div class="hero-demo">
+            <div class="demo-input">
+                <span class="typing-text" id="heroTyping">I want to start a food blog...</span>
+                <span class="cursor">|</span>
+            </div>
+            <div class="demo-arrow">→</div>
+            <div class="demo-output">
+                <div class="output-items">
+                    <div class="output-item">📝 50 Recipe Ideas</div>
+                    <div class="output-item">📸 Food Photography Tips</div>
+                    <div class="output-item">📱 Social Media Posts</div>
+                    <div class="output-item">💰 Monetization Plan</div>
+                </div>
+            </div>
+        </div>
+        <button class="hero-cta" onclick="scrollToSection('examples')">See What It Can Do</button>
+    </div>
+</section>
+
+<!-- Content Showcase Grid -->
+<section class="showcase" id="examples">
+    <div class="container">
+        <h2 class="section-title">What Would You Like To Create?</h2>
+        <div class="showcase-grid">
+            
+            <!-- Money Maker -->
+            <div class="showcase-card money" onclick="openDemo('money')">
+                <div class="card-icon">💰</div>
+                <h3>Side Hustle Generator</h3>
+                <p>Turn your hobby into income</p>
+                <div class="card-example">
+                    <div class="input">"I love gardening"</div>
+                    <div class="arrow">↓</div>
+                    <div class="output">Complete Etsy store + marketing plan</div>
+                </div>
+                <div class="card-tag money-tag">Make Money</div>
+            </div>
+
+            <!-- Wow Factor -->
+            <div class="showcase-card wow" onclick="openDemo('wow')">
+                <div class="card-icon">✨</div>
+                <h3>Family Movie Magic</h3>
+                <p>Turn photos into cinematic videos</p>
+                <div class="card-example">
+                    <div class="input">Upload 10 family photos</div>
+                    <div class="arrow">↓</div>
+                    <div class="output">Professional video with music & effects</div>
+                </div>
+                <div class="card-tag wow-tag">Mind-Blowing</div>
+            </div>
+
+            <!-- Useful -->
+            <div class="showcase-card useful" onclick="openDemo('useful')">
+                <div class="card-icon">🎯</div>
+                <h3>Party Planner Pro</h3>
+                <p>Complete party in one click</p>
+                <div class="card-example">
+                    <div class="input">"10-year-old dinosaur birthday"</div>
+                    <div class="arrow">↓</div>
+                    <div class="output">Invites + games + decorations + shopping list</div>
+                </div>
+                <div class="card-tag useful-tag">Super Helpful</div>
+            </div>
+
+            <!-- Cool/Smart -->
+            <div class="showcase-card cool" onclick="openDemo('cool')">
+                <div class="card-icon">🧠</div>
+                <h3>Personal Brand Builder</h3>
+                <p>Consistent presence everywhere</p>
+                <div class="card-example">
+                    <div class="input">"I'm a fitness coach"</div>
+                    <div class="arrow">↓</div>
+                    <div class="output">Social posts + bio + profile pics + content calendar</div>
+                </div>
+                <div class="card-tag cool-tag">So Smart</div>
+            </div>
+
+            <!-- Creative -->
+            <div class="showcase-card creative" onclick="openDemo('creative')">
+                <div class="card-icon">🎨</div>
+                <h3>Art Studio</h3>
+                <p>Bring any vision to life</p>
+                <div class="card-example">
+                    <div class="input">"Sunset over mountains, watercolor style"</div>
+                    <div class="arrow">↓</div>
+                    <div class="output">Watch it paint in real-time</div>
+                </div>
+                <div class="card-tag creative-tag">Amazing</div>
+            </div>
+
+            <!-- Problem Solver -->
+            <div class="showcase-card solver" onclick="openDemo('solver')">
+                <div class="card-icon">🔧</div>
+                <h3>Home Helper</h3>
+                <p>Solutions for everyday challenges</p>
+                <div class="card-example">
+                    <div class="input">"Organize my cluttered garage"</div>
+                    <div class="arrow">↓</div>
+                    <div class="output">Step-by-step plan + product recommendations</div>
+                </div>
+                <div class="card-tag solver-tag">Life Saver</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Stories -->
+<section class="success-stories">
+    <div class="container">
+        <h2>Real People, Real Results</h2>
+        <div class="stories-grid">
+            <div class="story">
+                <div class="story-avatar">👩‍🍳</div>
+                <div class="story-content">
+                    <h4>Sarah's Recipe Blog</h4>
+                    <p>"Made $500 in my first month selling AI-generated meal planners"</p>
+                    <div class="story-metric">$500 first month</div>
+                </div>
+            </div>
+            <div class="story">
+                <div class="story-avatar">👨‍💼</div>
+                <div class="story-content">
+                    <h4>Mike's Consulting Business</h4>
+                    <p>"Got 10 new clients from AI-created marketing materials"</p>
+                    <div class="story-metric">10 new clients</div>
+                </div>
+            </div>
+            <div class="story">
+                <div class="story-avatar">👩‍🎨</div>
+                <div class="story-content">
+                    <h4>Emma's Art Shop</h4>
+                    <p>"Etsy shop hit $2K monthly with AI-designed products"</p>
+                    <div class="story-metric">$2K monthly</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <h2>How It Works (It's Really This Simple)</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Tell It What You Want</h3>
+                <p>Just type your idea like you're talking to a friend</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Watch The Magic</h3>
+                <p>AI creates everything you need in minutes</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Get Your Results</h3>
+                <p>Download, share, or publish immediately</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <h2>Simple Pricing</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">Free</div>
+                <p>Perfect for trying it out</p>
+                <ul>
+                    <li>5 projects per month</li>
+                    <li>Basic templates</li>
+                    <li>Email support</li>
+                </ul>
+                <button class="pricing-btn">Start Free</button>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Creator</h3>
+                <div class="price">$19<span>/month</span></div>
+                <p>For serious content creators</p>
+                <ul>
+                    <li>Unlimited projects</li>
+                    <li>Premium templates</li>
+                    <li>Priority support</li>
+                    <li>Commercial license</li>
+                </ul>
+                <button class="pricing-btn">Start Creating</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Business</h3>
+                <div class="price">$49<span>/month</span></div>
+                <p>For teams and agencies</p>
+                <ul>
+                    <li>Everything in Creator</li>
+                    <li>Team collaboration</li>
+                    <li>Custom branding</li>
+                    <li>API access</li>
+                </ul>
+                <button class="pricing-btn">Get Started</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+    <div class="container">
+        <h2>Ready To Turn Your Ideas Into Income?</h2>
+        <p>Join thousands who are already creating amazing content</p>
+        <button class="hero-cta large">Start Creating For Free</button>
+        <p class="cta-subtext">No credit card required • Cancel anytime</p>
+    </div>
+</section>
+
+<!-- Demo Modal -->
+<div id="demoModal" class="modal" onclick="closeDemo()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close" onclick="closeDemo()">&times;</span>
+        <div id="demoContent"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
