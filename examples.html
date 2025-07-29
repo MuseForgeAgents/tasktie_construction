@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing Examples - TaskTie.ai</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .examples-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+```
+    .examples-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+    
+    .examples-hero p {
+        font-size: 1.3rem;
+        opacity: 0.9;
+    }
+    
+    .example-category {
+        padding: 60px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .example-category:nth-child(even) {
+        background: #f8fafc;
+    }
+    
+    .category-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .category-title {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: var(--text-primary);
+    }
+    
+    .category-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+    }
+    
+    .examples-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        margin-top: 40px;
+    }
+    
+    .example-item {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .example-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .example-image {
+        height: 200px;
+        background: linear-gradient(45deg, #f0f9ff, #e0e7ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .example-content {
+        padding: 25px;
+    }
+    
+    .example-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+    }
+    
+    .example-description {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+    
+    .example-details {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .detail-label {
+        color: var(--text-secondary);
+    }
+    
+    .detail-value {
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+    
+    .example-metrics {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .metric {
+        text-align: center;
+        flex: 1;
+    }
+    
+    .metric-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--success-color);
+    }
+    
+    .metric-label {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .try-this-btn {
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+    
+    .try-this-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .back-nav {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 600;
+        transition: all 0.3s ease;
+        z-index: 100;
+    }
+    
+    .back-nav:hover {
+        background: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+</style>
+```
+
+</head>
+<body>
+    <a href="index.html" class="back-nav">← Back to Home</a>
+
+```
+<section class="examples-hero">
+    <div class="container">
+        <h1>Real Examples, Real Results</h1>
+        <p>See what people just like you have created with TaskTie.ai</p>
+    </div>
+</section>
+
+<!-- Money Making Examples -->
+<section class="example-category">
+    <div class="container">
+        <div class="category-header">
+            <h2 class="category-title">💰 Money-Making Success Stories</h2>
+            <p class="category-subtitle">Turn hobbies and skills into real income</p>
+        </div>
+        
+        <div class="examples-grid">
+            <div class="example-item">
+                <div class="example-image">🌱</div>
+                <div class="example-content">
+                    <h3 class="example-title">Sarah's Garden Planning Business</h3>
+                    <p class="example-description">Turned her backyard gardening hobby into a thriving digital product business on Etsy.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Input:</span>
+                            <span class="detail-value">"I love vegetable gardening"</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Time to create:</span>
+                            <span class="detail-value">45 minutes</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Products created:</span>
+                            <span class="detail-value">15 digital templates</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$847</div>
+                            <div class="metric-label">First Month</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">2.3K</div>
+                            <div class="metric-label">Downloads</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">4.9★</div>
+                            <div class="metric-label">Rating</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+            
+            <div class="example-item">
+                <div class="example-image">📚</div>
+                <div class="example-content">
+                    <h3 class="example-title">Mike's Fitness Course Empire</h3>
+                    <p class="example-description">Created a complete online fitness course that now generates passive income monthly.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Input:</span>
+                            <span class="detail-value">"Personal trainer for busy professionals"</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Time to create:</span>
+                            <span class="detail-value">2 hours</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Course modules:</span>
+                            <span class="detail-value">12 video lessons</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$2.1K</div>
+                            <div class="metric-label">Monthly</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">156</div>
+                            <div class="metric-label">Students</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">4.8★</div>
+                            <div class="metric-label">Rating</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+            
+            <div class="example-item">
+                <div class="example-image">🎨</div>
+                <div class="example-content">
+                    <h3 class="example-title">Emma's Art Print Shop</h3>
+                    <p class="example-description">Generated unique art prints and home decor that customers love to buy.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Input:</span>
+                            <span class="detail-value">"Modern minimalist home decor"</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Time to create:</span>
+                            <span class="detail-value">30 minutes</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Designs created:</span>
+                            <span class="detail-value">25 print designs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$1.8K</div>
+                            <div class="metric-label">Monthly</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">892</div>
+                            <div class="metric-label">Sales</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">4.7★</div>
+                            <div class="metric-label">Rating</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Creative Examples -->
+<section class="example-category">
+    <div class="container">
+        <div class="category-header">
+            <h2 class="category-title">✨ Creative Masterpieces</h2>
+            <p class="category-subtitle">Bring your wildest ideas to life</p>
+        </div>
+        
+        <div class="examples-grid">
+            <div class="example-item">
+                <div class="example-image">🎬</div>
+                <div class="example-content">
+                    <h3 class="example-title">Johnson Family Vacation Movie</h3>
+                    <p class="example-description">Transformed 47 random vacation photos into a cinematic 4-minute family movie with music and professional transitions.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Photos uploaded:</span>
+                            <span class="detail-value">47 family photos</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Processing time:</span>
+                            <span class="detail-value">8 minutes</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Final video:</span>
+                            <span class="detail-value">4:23 HD movie</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">4.2K</div>
+                            <div class="metric-label">Views</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">127</div>
+                            <div class="metric-label">Shares</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">98%</div>
+                            <div class="metric-label">Love It</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+            
+            <div class="example-item">
+                <div class="example-image">🏠</div>
+                <div class="example-content">
+                    <h3 class="example-title">Dream Kitchen Redesign</h3>
+                    <p class="example-description">Generated multiple kitchen design concepts with 3D renders, shopping lists, and contractor recommendations.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Input:</span>
+                            <span class="detail-value">"Small kitchen, modern farmhouse style"</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Designs created:</span>
+                            <span class="detail-value">5 complete concepts</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Budget estimated:</span>
+                            <span class="detail-value">$15K-$28K range</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$3.2K</div>
+                            <div class="metric-label">Saved</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">3</div>
+                            <div class="metric-label">Quotes</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">100%</div>
+                            <div class="metric-label">Satisfied</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+            
+            <div class="example-item">
+                <div class="example-image">🎵</div>
+                <div class="example-content">
+                    <h3 class="example-title">Wedding Song Remix</h3>
+                    <p class="example-description">Created a personalized version of their wedding song with custom lyrics about their love story.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Original song:</span>
+                            <span class="detail-value">"Perfect" by Ed Sheeran</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Custom lyrics:</span>
+                            <span class="detail-value">Their love story details</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Final length:</span>
+                            <span class="detail-value">3:45 professional quality</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">850</div>
+                            <div class="metric-label">Wedding Guests</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">12K</div>
+                            <div class="metric-label">Social Plays</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">❤️</div>
+                            <div class="metric-label">Perfect</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Problem Solving Examples -->
+<section class="example-category">
+    <div class="container">
+        <div class="category-header">
+            <h2 class="category-title">🔧 Life-Changing Solutions</h2>
+            <p class="category-subtitle">Solve everyday problems instantly</p>
+        </div>
+        
+        <div class="examples-grid">
+            <div class="example-item">
+                <div class="example-image">🎂</div>
+                <div class="example-content">
+                    <h3 class="example-title">Perfect 8th Birthday Party</h3>
+                    <p class="example-description">Complete party planning for a Minecraft-themed birthday that made both kids and parents happy.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Party theme:</span>
+                            <span class="detail-value">Minecraft adventure</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Guest count:</span>
+                            <span class="detail-value">14 kids + parents</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Total budget:</span>
+                            <span class="detail-value">$127 (under budget!)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">14</div>
+                            <div class="metric-label">Happy Kids</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">2hr</div>
+                            <div class="metric-label">Setup Time</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">10/10</div>
+                            <div class="metric-label">Success</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+            
+            <div class="example-item">
+                <div class="example-image">🏠</div>
+                <div class="example-content">
+                    <h3 class="example-title">Garage Organization Miracle</h3>
+                    <p class="example-description">Transformed a cluttered nightmare garage into an organized, functional space with a clear plan and shopping list.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Space size:</span>
+                            <span class="detail-value">2-car garage, very cluttered</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Organization time:</span>
+                            <span class="detail-value">One weekend</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Storage cost:</span>
+                            <span class="detail-value">$189 total investment</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">90%</div>
+                            <div class="metric-label">Space Saved</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">2</div>
+                            <div class="metric-label">Cars Fit</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Stress Level</div>
+                            <div class="metric-value">📉</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+            
+            <div class="example-item">
+                <div class="example-image">✈️</div>
+                <div class="example-content">
+                    <h3 class="example-title">Dream Italy Vacation</h3>
+                    <p class="example-description">Planned a perfect 10-day Italy trip with hidden gems, restaurant recommendations, and day-by-day itinerary.</p>
+                    
+                    <div class="example-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Trip length:</span>
+                            <span class="detail-value">10 days, 4 cities</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Budget target:</span>
+                            <span class="detail-value">$3,500 for 2 people</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Actual cost:</span>
+                            <span class="detail-value">$3,127 (under budget!)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$373</div>
+                            <div class="metric-label">Saved</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">23</div>
+                            <div class="metric-label">Amazing Spots</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">💯</div>
+                            <div class="metric-label">Perfect Trip</div>
+                        </div>
+                    </div>
+                    
+                    <button class="try-this-btn">Try This Example</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="final-cta">
+    <div class="container">
+        <h2>Ready To Create Your Own Success Story?</h2>
+        <p>Join thousands who are already creating amazing content</p>
+        <button class="hero-cta large">Start Creating For Free</button>
+        <p class="cta-subtext">No credit card required • Get results in minutes</p>
+    </div>
+</section>
+
+<script>
+    // Add some interactivity to the examples
+    document.querySelectorAll('.try-this-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // In a real app, this would trigger the actual demo
+            this.textContent = 'Starting Demo...';
+            this.style.background = 'var(--gradient-success)';
+            
+            setTimeout(() => {
+                this.textContent = 'Try This Example';
+                this.style.background = 'var(--gradient-primary)';
+            }, 2000);
+        });
+    });
+
+    // Animate metrics on scroll
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const metrics = entry.target.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    metric.style.animation = 'none';
+                    setTimeout(() => {
+                        metric.style.animation = 'countUp 1s ease-out';
+                    }, 100);
+                });
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.example-item').forEach(item => {
+        observer.observe(item);
+    });
+
+    // Add CSS animation for count up effect
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+```
+
+</body>
+</html>
