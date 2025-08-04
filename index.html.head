@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museforge - Transform Your Casual Selfie Into Professional Headshots</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        min-height: 100vh;
+        color: #ffffff;
+        overflow-x: hidden;
+    }
+
+    .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 70%, #ff6b6b 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    header {
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #fff, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero {
+        padding: 4rem 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #fff 0%, #ffd700 50%, #ff6b6b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.1;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin: 3rem 0;
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #ffd700;
+        display: block;
+    }
+
+    .stat-label {
+        opacity: 0.8;
+        font-size: 0.9rem;
+    }
+
+    .upload-section {
+        margin: 4rem 0;
+    }
+
+    .upload-area {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .upload-area:hover {
+        border-color: #ffd700;
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(1.02);
+    }
+
+    .upload-area.dragover {
+        border-color: #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+    }
+
+    .upload-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.7;
+    }
+
+    .upload-text {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .upload-subtext {
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .cta-button {
+        background: linear-gradient(135deg, #ff6b6b, #ffd700);
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #000;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        margin: 1rem 0.5rem;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    }
+
+    .cta-button.primary {
+        font-size: 1.2rem;
+        padding: 1.2rem 2.5rem;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .pricing {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 4rem 0;
+    }
+
+    .pricing-card {
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .pricing-card.popular {
+        transform: scale(1.05);
+    }
+
+    .pricing-card.popular::before {
+        content: "MOST POPULAR";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ff6b6b;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .pricing-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .pricing-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-amount {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #ffd700;
+    }
+
+    .pricing-period {
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+
+    .gallery {
+        margin: 4rem 0;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .before-after {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        aspect-ratio: 1;
+    }
+
+    .before-after img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .before-after::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2px;
+        height: 100%;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+    }
+
+    .before-after::after {
+        content: "BEFORE → AFTER";
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 3;
+    }
+
+    .results-section {
+        display: none;
+        margin: 3rem 0;
+    }
+
+    .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .result-image {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        aspect-ratio: 1;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .result-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .download-btn {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+        background: #ff6b6b;
+        transform: scale(1.1);
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #fff, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .testimonials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+
+    .testimonial {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .testimonial-text {
+        font-style: italic;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .testimonial-author {
+        font-weight: 600;
+        color: #ffd700;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .feature {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .feature-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #ffd700;
+    }
+
+    .loading-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .loading-spinner {
+        width: 60px;
+        height: 60px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid #ffd700;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .trust-badges {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin: 3rem 0;
+        flex-wrap: wrap;
+    }
+
+    .trust-badge {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .sticky-cta {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 100;
+        background: linear-gradient(135deg, #ff6b6b, #ffd700);
+        color: #000;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+        transition: all 0.3s ease;
+        animation: bounce 3s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+    }
+
+    .sticky-cta:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
+    }
+
+    @media (max-width: 768px) {
+        .stats {
+            gap: 1.5rem;
+        }
+        
+        .pricing {
+            grid-template-columns: 1fr;
+        }
+        
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .sticky-cta {
+            bottom: 1rem;
+            right: 1rem;
+            left: 1rem;
+            width: auto;
+        }
+    }
+
+    .floating-elements {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .floating-element {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-element:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+        width: 120px;
+        height: 120px;
+        top: 60%;
+        right: 15%;
+        animation-delay: 2s;
+    }
+
+    .floating-element:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        bottom: 30%;
+        left: 20%;
+        animation-delay: 4s;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .payment-section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #card-element {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1rem 0;
+    }
+
+    .processing-status {
+        display: none;
+        text-align: center;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        margin: 2rem 0;
+    }
+
+    .status-step {
+        margin: 1rem 0;
+        padding: 1rem;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        opacity: 0.5;
+        transition: all 0.5s ease;
+    }
+
+    .status-step.active {
+        opacity: 1;
+        background: rgba(255, 215, 0, 0.2);
+        color: #ffd700;
+    }
+
+    .status-step.completed {
+        opacity: 1;
+        background: rgba(76, 175, 80, 0.2);
+        color: #4CAF50;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+```
+<div class="floating-elements">
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+</div>
+
+<header>
+    <div class="container">
+        <nav class="nav">
+            <div class="logo">🎨 Museforge</div>
+            <div class="trust-badges">
+                <div class="trust-badge">🔒 Secure & Private</div>
+                <div class="trust-badge">⚡ 2-Min Process</div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>Transform Your Casual Selfie Into 5 Professional Headshots</h1>
+            <p>AI-powered headshot generation that creates LinkedIn-ready professional photos in minutes. Upload once, get 5 unique styles instantly.</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">50,000+</span>
+                    <span class="stat-label">Professionals Trust Us</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">2 Min</span>
+                    <span class="stat-label">Average Processing</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">8x</span>
+                    <span class="stat-label">Cheaper Than Photographers</span>
+                </div>
+            </div>
+
+            <button class="cta-button primary" onclick="scrollToUpload()">
+                Generate My Headshots - $10 ✨
+            </button>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Real Transformations</h2>
+            <p style="text-align: center; opacity: 0.9; margin-bottom: 2rem;">See how our AI transforms casual selfies into professional headshots</p>
+            
+            <div class="gallery-grid">
+                <div class="before-after glass-card">
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        Sample Before/After #1
+                    </div>
+                </div>
+                <div class="before-after glass-card">
+                    <div style="background: linear-gradient(135deg, #f093fb, #f5576c); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        Sample Before/After #2
+                    </div>
+                </div>
+                <div class="before-after glass-card">
+                    <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        Sample Before/After #3
+                    </div>
+                </div>
+                <div class="before-after glass-card">
+                    <div style="background: linear-gradient(135deg, #43e97b, #38f9d7); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        Sample Before/After #4
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="upload-section" id="upload-section">
+        <div class="container">
+            <div class="glass-card">
+                <h2 class="section-title">Upload Your Selfie</h2>
+                <p style="text-align: center; opacity: 0.9; margin-bottom: 2rem;">Drag & drop or click to upload. We support JPG, PNG, and HEIC formats.</p>
+                
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-text">Click or drag your selfie here</div>
+                    <div class="upload-subtext">Best results with clear, well-lit photos facing the camera</div>
+                    <input type="file" id="fileInput" class="file-input" accept="image/*" onchange="handleFileUpload(this.files[0])">
+                </div>
+
+                <div id="imagePreview" style="display: none; text-align: center; margin-top: 2rem;">
+                    <img id="previewImg" style="max-width: 300px; max-height: 300px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
+                    <div style="margin-top: 1rem;">
+                        <button class="cta-button" onclick="selectPlan()">Continue to Payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Choose Your Package</h2>
+            <div class="pricing">
+                <div class="pricing-card glass-card">
+                    <div class="pricing-header">
+                        <div class="pricing-title">Starter</div>
+                        <div class="pricing-amount">$10</div>
+                        <div class="pricing-period">5 professional headshots</div>
+                    </div>
+                    <button class="cta-button" onclick="initializePayment(10, 5)">Get 5 Headshots</button>
+                </div>
+                
+                <div class="pricing-card glass-card popular">
+                    <div class="pricing-header">
+                        <div class="pricing-title">Professional</div>
+                        <div class="pricing-amount">$25</div>
+                        <div class="pricing-period">15 headshots • Save 17%</div>
+                    </div>
+                    <button class="cta-button" onclick="initializePayment(25, 15)">Get 15 Headshots</button>
+                </div>
+                
+                <div class="pricing-card glass-card">
+                    <div class="pricing-header">
+                        <div class="pricing-title">Premium</div>
+                        <div class="pricing-amount">$45</div>
+                        <div class="pricing-period">30 headshots • Save 25%</div>
+                    </div>
+                    <button class="cta-button" onclick="initializePayment(45, 30)">Get 30 Headshots</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="payment-section" id="payment-section" style="display: none;">
+        <div class="container">
+            <div class="glass-card">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Secure Payment</h3>
+                <div id="card-element"></div>
+                <div id="card-errors" role="alert" style="color: #ff6b6b; margin-top: 1rem;"></div>
+                <button id="submit-payment" class="cta-button" style="width: 100%; margin-top: 1rem;">
+                    Process Payment 🔒
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="processing-status" id="processing-status">
+        <h3>Creating Your Professional Headshots...</h3>
+        <div class="status-step" id="step1">
+            <strong>📤 Uploading your image...</strong>
+        </div>
+        <div class="status-step" id="step2">
+            <strong>🧠 AI analyzing your features...</strong>
+        </div>
+        <div class="status-step" id="step3">
+            <strong>✨ Generating professional variations...</strong>
+        </div>
+        <div class="status-step" id="step4">
+            <strong>🎨 Applying finishing touches...</strong>
+        </div>
+        <div class="status-step" id="step5">
+            <strong>✅ Your headshots are ready!</strong>
+        </div>
+    </div>
+
+    <section class="results-section" id="results-section">
+        <div class="container">
+            <div class="glass-card">
+                <h2 class="section-title">Your Professional Headshots</h2>
+                <p style="text-align: center; opacity: 0.9; margin-bottom: 2rem;">Click the download button on each image to save</p>
+                
+                <div class="results-grid" id="results-grid">
+                    <!-- Results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Museforge?</h2>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <div class="feature-title">Lightning Fast</div>
+                    <p>Get your professional headshots in under 2 minutes. No waiting weeks for a photographer.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <div class="feature-title">5 Unique Styles</div>
+                    <p>Corporate, creative, academic, startup, and executive styles - perfect for any platform.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🔒</span>
+                    <div class="feature-title">Privacy First</div>
+                    <p>Your images are encrypted, processed securely, and automatically deleted after 24 hours.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💰</span>
+                    <div class="feature-title">Money Back Guarantee</div>
+                    <p>Not satisfied? Get a full refund within 7 days, no questions asked.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-text">"Absolutely blown away! My LinkedIn profile got 3x more views after updating with these headshots. Worth every penny."</div>
+                    <div class="testimonial-author">- Sarah Chen, Marketing Director</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"As a remote worker, I needed professional photos fast. Museforge delivered exactly what I needed in minutes."</div>
+                    <div class="testimonial-author">- Marcus Johnson, Software Engineer</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"The quality rivals expensive photography studios. I've recommended this to my entire team."</div>
+                    <div class="testimonial-author">- Amanda Rodriguez, Startup Founder</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<button class="sticky-cta" onclick="scrollToUpload()">
+    Start Now - $10 🚀
+</button>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div>Processing your headshots...</div>
+</div>
+
+<script>
+    // Initialize Stripe
+    const stripe = Stripe('pk_test_your_publishable_key_here'); // Replace with your actual Stripe publishable key
+    const elements = stripe.elements();
+    const cardElement = elements.create('card');
+    let uploadedFile = null;
+    let selectedPlan = null;
+
+    function scrollToUpload() {
+        document.getElementById('upload-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleFileUpload(file) {
+        if (file) {
+            uploadedFile = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImg').src = e.target.result;
+                document.getElementById('imagePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function selectPlan() {
+        document.getElementById('pricing-section').style.display = 'block';
+        document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function initializePayment(amount, images) {
+        selectedPlan = { amount, images };
+        document.getElementById('payment-section').style.display = 'block';
+        
+        // Mount Stripe card element
+        if (!cardElement._mounted) {
+            cardElement.mount('#card-element');
+            cardElement._mounted = true;
+        }
+        
+        document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth' });
+        
+        // Update submit button text
+        document.getElementById('submit-payment').innerHTML = `Pay $${amount} for ${images} Headshots 🔒`;
+    }
+
+    // Handle payment submission
+    document.getElementById('submit-payment').addEventListener('click', async (event) => {
+        event.preventDefault();
+        
+        if (!uploadedFile || !selectedPlan) {
+            alert('Please upload an image and select a plan first.');
+            return;
+        }
+
+        const submitButton = document.getElementById('submit-payment');
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Processing...';
+
+        // Create payment intent (you'll need to implement this server-side)
+        try {
+            const response = await fetch('/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: selectedPlan.amount * 100, // Stripe expects cents
+                    images: selectedPlan.images
+                }),
+            });
+
+            const { client_secret } = await response.json();
+
+            const { error } = await stripe.confirmCardPayment(client_secret, {
+                payment_method: {
+                    card: cardElement,
+                }
+            });
+
+            if (error) {
+                document.getElementById('card-errors').textContent = error.message;
+                submitButton.disabled = false;
+                submitButton.innerHTML = `Pay $${selectedPlan.amount} for ${selectedPlan.images} Headshots 🔒`;
+            } else {
+                // Payment successful, start processing
+                processImages();
+            }
+        } catch (err) {
+            // For demo purposes, simulate successful payment
+            console.log('Demo mode: simulating successful payment');
+            processImages();
+        }
+    });
+
+    function processImages() {
+        // Hide payment section and show processing
+        document.getElementById('payment-section').style.display = 'none';
+        document.getElementById('processing-status').style.display = 'block';
+        document.getElementById('processing-status').scrollIntoView({ behavior: 'smooth' });
+
+        // Simulate processing steps
+        const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+        let currentStep = 0;
+
+        function nextStep() {
+            if (currentStep > 0) {
+                document.getElementById(steps[currentStep - 1]).classList.remove('active');
+                document.getElementById(steps[currentStep - 1]).classList.add('completed');
+            }
+            
+            if (currentStep < steps.length) {
+                document.getElementById(steps[currentStep]).classList.add('active');
+                currentStep++;
+                setTimeout(nextStep, 2000);
+            } else {
+                // Processing complete, show results
+                showResults();
+            }
+        }
+
+        nextStep();
+    }
+
+    function showResults() {
+        document.getElementById('processing-status').style.display = 'none';
+        document.getElementById('results-section').style.display = 'block';
+        
+        const resultsGrid = document.getElementById('results-grid');
+        resultsGrid.innerHTML = '';
+
+        // Generate sample results (in real implementation, these would be from your AI API)
+        const styles = ['Corporate', 'Creative', 'Academic', 'Startup', 'Executive'];
+        
+        for (let i = 0; i < selectedPlan.images; i++) {
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'result-image glass-card';
+            resultDiv.innerHTML = `
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; position: relative;">
+                    AI Generated Headshot ${i + 1}
+                    <button class="download-btn" onclick="downloadImage(${i})" title="Download">
+                        ⬇️
+                    </button>
+                </div>
+            `;
+            resultsGrid.appendChild(resultDiv);
+        }
+
+        document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function downloadImage(index) {
+        // In real implementation, this would download the actual generated image
+        alert(`Downloading headshot ${index + 1}...`);
+    }
+
+    // Drag and drop functionality
+    const uploadArea = document.querySelector('.upload-area');
+
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFileUpload(files[0]);
+        }
+    });
+
+    // Smooth scrolling for navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            observer.observe(card);
+        });
+    });
+
+    // Add fadeInUp animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Handle card errors
+    cardElement.addEventListener('change', ({error}) => {
+        const displayError = document.getElementById('card-errors');
+        if (error) {
+            displayError.textContent = error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+</script>
+```
+
+</body>
+</html>
